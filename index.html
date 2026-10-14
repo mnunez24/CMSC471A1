@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Temperature Stability in 2017</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main class="container">
+            <h1>Which locations have the most stable temperatures?</h1>
+            <p>
+                Compare the 15 most stable U.S. weather stations across seasons in 2017. Lower temperature variability
+                means more stable temperatures.
+            </p>
+            <p class="notice">
+                <strong>Available dates: January 1-September 21.</strong> Winter includes January-February only, and
+                fall includes September 1-21 only. Spring and summer are complete.
+            </p>
+            <label for="season">Season:</label>
+            <select id="season">
+                <option value="annual">All available dates</option>
+                <option value="winter">Winter (partial: Jan-Feb)</option>
+                <option value="spring">Spring (Mar-May)</option>
+                <option value="summer">Summer (Jun-Aug)</option>
+                <option value="fall">Fall (partial: Sep 1-21)</option>
+            </select>
+            <p id="status" role="status">Loading weather data…</p>
+            <h2 id="chart-title">Most stable stations</h2>
+            <p>Hover over a bar or focus it with Tab for its variability and observation count.</p>
+            <div id="tooltip" role="tooltip" style="display: none"></div>
+            <div id="chart" aria-labelledby="chart-title"></div>
+            <p class="axis-label">Standard deviation of daily midpoint temperature (°F)</p>
+            <p id="detail" aria-live="polite">Select a season to compare rankings.</p>
+            <section>
+                <h2>About the data and design</h2>
+                <p>
+                    This visualization uses the supplied NOAA daily weather dataset for 2017. Each location is a weather
+                    station in a U.S. state or territory. Daily midpoint temperature is calculated as (TMIN + TMAX) / 2,
+                    since reported TAVG is often missing. Canadian stations are excluded.
+                </p>
+                <p>
+                    Stability is measured by the standard deviation of daily midpoint temperatures. A lower value means
+                    temperatures stayed closer to their period average. Stations need observations for at least 80% of
+                    available dates in the selected period. Partial seasons should not be interpreted as full-season
+                    results, and a single year does not describe long-term climate.
+                </p>
+                <p>
+                    Horizontal bars make station rankings easy to compare and provide room for station names. Every bar
+                    starts at zero; the scale stays the same when switching seasons. The season dropdown is a dynamic
+                    filter, and tooltips provide details on demand. A heatmap and daily chart were considered, then
+                    removed to keep the visualization focused on the ranking question.
+                </p>
+                <p>
+                    Source:
+                    <a href="https://zcliu.github.io/teaching/CMSC471/assignments/A1-interactive.html"
+                        >CMSC 471 Assignment 1</a
+                    >, supplied weather.csv (NOAA daily weather observations). The code structure, transitions, and tooltip interaction draw on our Lab 4 D3 visualization. The chart is implemented with <a href="https://d3js.org/">D3.js</a> (version 7.9.0).
+                </p>
+                <h2>Development process</h2>
+                <p>
+                    AI assisted with design exploration, data preparation, and implementation. 
+                </p>
+                <p>
+                    <strong>Submission by:</strong> Matthew, Jonathon, Joshua 
+                </p>
+            </section>
+        </main>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>

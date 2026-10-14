@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #222;
+    background: white;
+}
+main {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 0 20px;
+}
+h1 {
+    font-size: 28px;
+}
+h2 {
+    font-size: 20px;
+}
+p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+.notice {
+    background: #f3f3f3;
+    border-left: 3px solid #888;
+    padding: 10px 14px;
+}
+select {
+    margin: 12px 0 12px 8px;
+    padding: 8px;
+    font: inherit;
+    max-width: 100%;
+}
+#status,
+.axis-label {
+    color: #555;
+    font-size: 12px;
+}
+#chart { overflow-x: auto; }
+#chart svg { display: block; width: 100%; min-width: 640px; height: auto; }
+.station-name, .value { font: 12px Arial, sans-serif; fill: #222; }
+.bar { fill: #507e9e; }
+.row-background { fill: transparent; }
+.station:hover .row-background, .station:focus .row-background { fill: #eef3f7; }
+.station:focus { outline: none; }
+.station:focus .bar { stroke: #173e59; stroke-width: 2; }
+select:focus-visible { outline: 2px solid #235b82; outline-offset: 2px; }
+.axis-label {
+    color: #555;
+    font-size: 12px;
+}
+.axis-label {
+    text-align: center;
+}
+#detail {
+    min-height: 45px;
+    background: #f7f7f7;
+    padding: 10px;
+}
+section {
+    border-top: 1px solid #ccc;
+    margin-top: 24px;
+    padding-top: 12px;
+}
+a {
+    color: #245c87;
+}
+@media (max-width: 550px) {
+    main {
+        margin: 20px auto;
+        padding: 0 12px;
+    }
+    h1 {
+        font-size: 23px;
+    }
+}
+
+/* Familiar Lab 4 chart frame, axis styling, and floating tooltip. */
+#chart svg { margin: 1rem 0; border: 1px solid #ccc; box-sizing: border-box; }
+.x-axis path, .x-axis line { stroke: #333; shape-rendering: crispEdges; }
+.x-axis text { font: 12px Arial, sans-serif; }
+.axis-label { font-weight: bold; }
+#tooltip {
+    position: absolute;
+    width: 260px;
+    max-width: calc(100vw - 40px);
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    pointer-events: none;
+    font-size: 12px;
+    line-height: 1.6;
+    z-index: 10;
+}
