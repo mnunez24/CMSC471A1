@@ -75,16 +75,29 @@ function updateVis() {
         .selectAll("g.station")
         .data(top, stationKey)
         .join((enter) => {
-            const row = enter.append("g").attr("class", "station");
+            const row = enter
+                .append("g")
+                .attr("class", "station")
+                .attr("transform", (station) =>
+                `translate(0,${yScale(stationKey(station))})`
+                )
+                .style("opacity", 0);
             row.append("title");
             row.append("rect").attr("class", "row-background");
             row.append("rect").attr("class", "bar").attr("width", 0);
             row.append("text").attr("class", "station-name").attr("text-anchor", "end");
             row.append("text").attr("class", "value");
             return row;
-        });
+        },
+        update => update,
+        exit => exit
+                .transition()
+                .duration(duration)
+                .style("opacity",0)
+                .remove()
+        );
 
-    rows.attr("transform", (station) => `translate(0,${yScale(stationKey(station))})`)
+    rows
         .attr("tabindex", 0)
         .attr("aria-label", description)
         .on("mouseenter", function (event, station) {
@@ -104,6 +117,15 @@ function updateVis() {
             d3.select(this).select(".bar").style("stroke", null);
         })
         .on("focus click", (event, station) => d3.select("#detail").text(description(station)));
+    
+    rows
+        .transition()
+        .duration(duration)
+        .ease(d3.easeCubicInOut)
+        .attr("transform", (station) =>
+            `translate(0,${yScale(stationKey(station))})`
+    )
+    .style("opacity",1);
     rows.select("title").text(description);
     rows.select(".row-background")
         .attr("x", -margin.left)
@@ -118,11 +140,16 @@ function updateVis() {
         .ease(d3.easeCubicInOut)
         .attr("width", (station) => xScale(station.stats[period].sd));
     rows.select(".station-name")
+        .transition()
+        .duration(duration)
         .attr("x", -10)
+        .duration(duration)
         .attr("y", yScale.bandwidth() / 2)
         .attr("dy", "0.35em")
         .text((station) => `${station.name}, ${station.state}`);
     rows.select(".value")
+        .transition()
+        .duration(duration)
         .attr("x", (station) => xScale(station.stats[period].sd) + 7)
         .attr("y", yScale.bandwidth() / 2)
         .attr("dy", "0.35em")
