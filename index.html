@@ -33,38 +33,59 @@
             <p class="axis-label">Standard deviation of daily midpoint temperature (°F)</p>
             <p id="detail" aria-live="polite">Select a season to compare rankings.</p>
             <section>
-                <h2>About the data and design</h2>
-                <p>
-                    This visualization uses the supplied NOAA daily weather dataset for 2017. Each location is a weather
-                    station in a U.S. state or territory. Daily midpoint temperature is calculated as (TMIN + TMAX) / 2,
-                    since reported TAVG is often missing. Canadian stations are excluded.
-                </p>
-                <p>
-                    Stability is measured by the standard deviation of daily midpoint temperatures. A lower value means
-                    temperatures stayed closer to their period average. Stations need observations for at least 80% of
-                    available dates in the selected period. Partial seasons should not be interpreted as full-season
-                    results, and a single year does not describe long-term climate.
-                </p>
-                <p>
-                    Horizontal bars make station rankings easy to compare and provide room for station names. Every bar
-                    starts at zero; the scale stays the same when switching seasons. The season dropdown is a dynamic
-                    filter, and tooltips provide details on demand. A heatmap and daily chart were considered, then
-                    removed to keep the visualization focused on the ranking question.
-                </p>
-                <p>
-                    Source:
-                    <a href="https://zcliu.github.io/teaching/CMSC471/assignments/A1-interactive.html"
-                        >CMSC 471 Assignment 1</a
-                    >, supplied weather.csv (NOAA daily weather observations). The code structure, transitions, and tooltip interaction draw on our Lab 4 D3 visualization. The chart is implemented with <a href="https://d3js.org/">D3.js</a> (version 7.9.0).
-                </p>
-                <h2>Development process</h2>
-                <p>
-                    AI assisted with design exploration, data preparation, and implementation. 
-                </p>
-                <p>
-                    <strong>Submission by:</strong> Matthew, Jonathon, Joshua 
-                </p>
-            </section>
+    <h2>About the data and design</h2>
+    <p>
+        This visualization uses the supplied NOAA daily weather dataset for 2017, which covers January 1 to
+        September 21. Each location is a weather station in a U.S. state or territory, and we excluded the Canadian
+        stations. Because average temperature was often missing, we used the daily midpoint temperature, calculated as
+        (Minimum Temperature + Maximum Temperature) / 2. Our question is which locations have the most stable
+        temperatures, and whether the answer changes by season.
+    </p>
+    <p>
+        Stability is measured by the standard deviation of daily midpoint temperatures, where a lower value means
+        temperatures stayed closer to their period average. Stations need observations for at least 80% of the
+        available dates in the selected period so that poorly covered stations cannot rank highly by accident. Winter (January
+        to February) and fall (September 1 to 21) are only partial seasons, and a single year does not describe
+        long-term climate.
+    </p>
+    <p>
+        We used horizontal bars because the main task is ranking and comparing stations, and bar length is an accurate
+        encoding that leaves room for long station names. by using a bar, viewers can be able to quickly compare different temperatures from different stations just by viewing the graph.
+        Every bar starts at zero and the scale stays the same across seasons, so changes in bar length reflect real changes in the data. The interactions are a season dropdown that
+        works as a dynamic filter, and tooltips that provide details on you hover or click on a bar. Bars also get a highlight outline on
+        hover and can be focused with the keyboard. When the season changes, bars animate to their new rank and width
+        and entering or leaving stations fade, so users can follow a station from one season to the next. Some alternate designs that we considered were
+        a map, a calendar heatmap, and a daily line chart, but we chose not to use those designs as it hid the ranking or showed too much at
+        once, so we removed them to keep the visualization focused on one question.
+    </p>
+    <p>
+        Our main challenges were presenting standard deviation in a way that is easy to understand, handling missing
+        average temperatures, and making the tooltip feel natural. Our first tooltip appeared in the same spot no matter
+        where the cursor was, so we changed it to follow the cursor and stay on screen. We also spent time making the
+        season transitions smooth by keying each bar to a specific station.
+    </p>
+    <p>
+        Source:
+        <a href="https://zcliu.github.io/teaching/CMSC471/assignments/A1-interactive.html">CMSC 471 Assignment 1</a>,
+        supplied weather.csv (NOAA daily weather observations). The code structure, transitions, and tooltip
+        interaction draw on our Lab 4 D3 visualization. The chart is implemented with
+        <a href="https://d3js.org/">D3.js</a> (version 7.9.0).
+    </p>
+
+    <h2>Development process</h2>
+    <p>
+        We split the work evenly. Matthew handled data preparation, including filtering out the Canadian stations,
+        computing the daily midpoint temperatures, and calculating the standard deviation and 80% coverage rule for each
+        season. Jonathon wrote the page layout and styling, the write-up, and the accessibility features such as
+        keyboard focus and labels. Joshua built the D3 chart, the season transitions, and the cursor-following tooltip,
+        and recorded the demo video. We all tested the page and reviewed each other's code. We spent roughly 5
+        people-hours in total, and the data preparation and the tooltip and transitions took the most time.
+    </p>
+    <p>
+        We used AI tools, specifically ChatGPT, to help with ideas on how to display the data as well as helping with implementing the software for it.
+    </p>
+    <p><strong>Submission by:</strong> Matthew, Jonathon, Joshua</p>
+</section>
         </main>
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="app.js"></script>
